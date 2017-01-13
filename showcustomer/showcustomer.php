@@ -26,8 +26,8 @@ $defaultBilling = $customer->getDefaultBillingAddress();
 $defaultShipping = $customer->getDefaultShippingAddress();
 
 foreach ($customer->getAddresses() as $address) {
-	echo 'IsDefaultBillingAddress: ' . ($address->getId() == $defaultBilling->getId() ? 'Yes' : 'No') . PHP_EOL;
-	echo 'IsDefaultShippingAddress: ' . ($address->getId() == $defaultShipping->getId() ? 'Yes' : 'No') . PHP_EOL;
+	echo 'IsDefaultBillingAddress: ' . ($defaultBilling && $defaultBilling->getId() == $address->getId() ? 'Yes' : 'No') . PHP_EOL;
+	echo 'IsDefaultShippingAddress: ' . ($defaultShipping && $defaultShipping->getId() == $address->getId() ? 'Yes' : 'No') . PHP_EOL;
 
 	echo 'ID: ' . $address->getId() . PHP_EOL;
 	echo 'First Name: ' . $address->getFirstname() . PHP_EOL;
