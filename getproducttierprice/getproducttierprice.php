@@ -4,20 +4,19 @@ include('/www/magento2.1/app/bootstrap.php');
 
 $bootstrap = Bootstrap::create(BP, $_SERVER);
 $objectManager = $bootstrap->getObjectManager();
-$url = \Magento\Framework\App\ObjectManager::getInstance();
-$storeManager = $url->get('\Magento\Store\Model\StoreManagerInterface');
-$mediaurl= $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+#$url = \Magento\Framework\App\ObjectManager::getInstance();
+#$storeManager = $url->get('\Magento\Store\Model\StoreManagerInterface');
+#$mediaurl= $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
 
 $state = $objectManager->get('\Magento\Framework\App\State');
 $state->setAreaCode('frontend');
 
-$websiteId = $storeManager->getWebsite()->getWebsiteId();
+#$websiteId = $storeManager->getWebsite()->getWebsiteId();
 
 $productId = 1;
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $product_obj = $objectManager->create('Magento\Catalog\Model\Product')->load($productId);
-
-#getCustomerGroupId
 
 getDefaultGroup($product_obj);
 getAnyGroup($product_obj);
