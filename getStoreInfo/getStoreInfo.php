@@ -30,6 +30,8 @@ $storeCode = $storeManager->getStore($storeId)->getCode();
 $storeName = $storeManager->getStore($storeId)->getName();
 $currentUrl = $storeManager->getStore($storeId)->getCurrentUrl();
 $isActive = $storeManager->getStore($storeId)->isActive();
+$isFrontUrlSecure = $storeManager->getStore($storeId)->isFrontUrlSecure();
+$isCurrentlySecure = $storeManager->getStore($storeId)->isCurrentlySecure();
 
 echo 'baseURL: ' . $baseURL . PHP_EOL;
 echo 'mediaBaseURL: ' . $mediaBaseURL . PHP_EOL;
@@ -39,3 +41,5 @@ echo 'storeCode: ' . $storeCode . PHP_EOL;
 echo 'storeName: ' . $storeName . PHP_EOL;
 echo 'currentUrl: ' . $currentUrl . PHP_EOL;
 echo 'isActive: ' . $isActive . PHP_EOL;
+echo 'isFrontUrlSecure: ' . var_export($isFrontUrlSecure, true) . PHP_EOL;
+echo 'isCurrentlySecure: ' . var_export($isCurrentlySecure, true) . PHP_EOL;
