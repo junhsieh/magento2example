@@ -1,5 +1,7 @@
 <?php
-$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+include __DIR__ . '/../common.php';
+
+$state->setAreaCode('base');
 
 $listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
 
