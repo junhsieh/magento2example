@@ -1,18 +1,7 @@
 <?php
-use \Magento\Framework\App\Bootstrap;
-include('/www/magento2.1/app/bootstrap.php');
+include __DIR__ . '/../common.php';
 
-$bootstrap = Bootstrap::create(BP, $_SERVER);
-$objectManager = $bootstrap->getObjectManager();
-
-#$url = \Magento\Framework\App\ObjectManager::getInstance();
-#$storeManager = $url->get('\Magento\Store\Model\StoreManagerInterface');
-#$mediaurl= $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
-
-$state = $objectManager->get('\Magento\Framework\App\State');
-$state->setAreaCode('frontend');
-
-#$websiteId = $storeManager->getWebsite()->getWebsiteId();
+$state->setAreaCode('base');
 
 $productId = 1;
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
