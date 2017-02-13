@@ -17,8 +17,8 @@ $product = $productRepository->get($sku);
 ### Load stock item
 $stockItem = $stockRegistry->getStockItem($product->getId());
 
-$stockItem->setData('qty', $stockQty);
-#$stockItem->setQty($stockQty);
+$stockItem->setQty($stockQty);
+#$stockItem->setData('qty', $stockQty);
 
 #$stockItem->setData('manage_stock', $stockData['manage_stock']);
 #$stockItem->setData('is_in_stock', $stockData['is_in_stock']);

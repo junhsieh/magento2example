@@ -1,2 +1,2 @@
 # magento2example
-Magento 2 example
+Magento 2.1 examples
