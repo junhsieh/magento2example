@@ -1,25 +1,18 @@
 <?php
+include __DIR__ . '/../common.php';
+
+$state->setAreaCode('frontend');
+
 // Reference:
 // https://vinothkumaarr.wordpress.com/2016/05/13/add-customer-and-address-programmatically-magento2/
 
-use \Magento\Framework\App\Bootstrap;
-include('/www/magento2.1/app/bootstrap.php');
-
-$bootstrap = Bootstrap::create(BP, $_SERVER);
-$objectManager = $bootstrap->getObjectManager();
-$url = \Magento\Framework\App\ObjectManager::getInstance();
-$storeManager = $url->get('\Magento\Store\Model\StoreManagerInterface');
-$mediaurl= $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
-$state = $objectManager->get('\Magento\Framework\App\State');
-$state->setAreaCode('frontend');
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+$storeId = $storeManager->getStore()->getId();
 
 // Customer Factory to Create Customer
 $customerFactory = $objectManager->get('\Magento\Customer\Model\CustomerFactory');
 $websiteId = $storeManager->getWebsite()->getWebsiteId();
 
-/// Get Store ID
-$store = $storeManager->getStore();
-$storeId = $store->getStoreId();
 
 // Instantiate object (this is the most important part)
 $customer = $customerFactory->create();
