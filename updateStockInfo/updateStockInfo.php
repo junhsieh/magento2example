@@ -3,9 +3,10 @@ include __DIR__ . '/../common.php';
 
 $state->setAreaCode('base');
 
-###
+### Reference:
+### http://magento.stackexchange.com/questions/96519/magento-2-programmatically-updating-inventory
 $sku = 'WWW1';
-$stockValue = 55;
+$stockQty = 55;
 
 $productRepository = $objectManager->create('Magento\Catalog\Api\ProductRepositoryInterface');
 $stockRegistry = $objectManager->create('Magento\CatalogInventory\Api\StockRegistryInterface');
@@ -15,7 +16,9 @@ $product = $productRepository->get($sku);
 
 ### Load stock item
 $stockItem = $stockRegistry->getStockItem($product->getId());
-$stockItem->setData('qty', $stockValue);
+
+$stockItem->setData('qty', $stockQty);
+#$stockItem->setQty($stockQty);
 
 #$stockItem->setData('manage_stock', $stockData['manage_stock']);
 #$stockItem->setData('is_in_stock', $stockData['is_in_stock']);
