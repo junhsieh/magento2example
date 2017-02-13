@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . '/../common.php';
 
-$state->setAreaCode('frontend');
+$state->setAreaCode('base');
 
 // Reference:
 // https://vinothkumaarr.wordpress.com/2016/05/13/add-customer-and-address-programmatically-magento2/
@@ -25,38 +25,43 @@ $customer->setLastname("test last");
 $customer->setPassword("test123");
 
 try{
-  // Save data
-  $customer->save();
-  echo 'Succesfully Saved. Customer ID: '.$customer->getId() . PHP_EOL;
+	// Save data
+	$customer->save();
+	echo 'Succesfully Saved. Customer ID: '.$customer->getId() . PHP_EOL;
 
-  // Add Address For created customer
-  $addresss = $objectManager->get('\Magento\Customer\Model\AddressFactory');
-  $address = $addresss->create();
+	// Add Address For created customer
+	$addresss = $objectManager->get('\Magento\Customer\Model\AddressFactory');
+	$address = $addresss->create();
 
-  $address->setCustomerId($customer->getId())
-    ->setFirstname('test first')
-    ->setLastname('test last')
-    ->setCountryId('US')
-    ->setRegionId('62') //state/province, only needed if the country is USA
-    ->setPostcode('98248')
-    ->setCity('Ferndale')
-    ->setTelephone('7781234567')
-    ->setFax('7781234567')
-    ->setCompany('test company')
-    ->setStreet('test street')
-    ->setIsDefaultBilling('1')
-    ->setIsDefaultShipping('1')
-    ->setSaveInAddressBook('1');
-  try{
-    $address->save();
-  }
-  catch (Exception $e) {
-    Zend_Debug::dump($e->getMessage());
-  }
+	$address->setCustomerId($customer->getId())
+		->setFirstname('test first')
+		->setLastname('test last')
+		->setCountryId('US')
+		->setRegionId('62') //state/province, only needed if the country is USA
+		->setPostcode('98248')
+		->setCity('Ferndale')
+		->setTelephone('7781234567')
+		->setFax('7781234567')
+		->setCompany('test company')
+		->setStreet('test street')
+		->setIsDefaultBilling('1')
+		->setIsDefaultShipping('1')
+		->setSaveInAddressBook('1');
+	try{
+		$address->save();
+	}
+	catch (Exception $e) {
+		Zend_Debug::dump($e->getMessage());
+	}
 }
 catch(Exception $e)
 {
-  Mage::log($e->getMessage());
-  print_r($e->getMessage());
+	// stored in var/log/debug.log
+	#$objectManager->get('\Psr\Log\LoggerInterface')->addDebug($e->getMessage() . 'ASDF 2');
+	
+	// stored in var/log/exception.log
+	$objectManager->get('\Psr\Log\LoggerInterface')->addCritical($e);
+
+	print_r($e->getMessage());
 }
 
