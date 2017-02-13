@@ -1,17 +1,21 @@
 <?php
 use \Magento\Framework\App\Bootstrap;
+
 include('/www/magento2.1/app/bootstrap.php');
 
 $bootstrap = Bootstrap::create(BP, $_SERVER);
+
 $objectManager = $bootstrap->getObjectManager();
-$url = \Magento\Framework\App\ObjectManager::getInstance();
-$storeManager = $url->get('\Magento\Store\Model\StoreManagerInterface');
-$mediaurl= $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
 
 $state = $objectManager->get('\Magento\Framework\App\State');
-$state->setAreaCode('frontend');
+$state->setAreaCode('base');
 
-$websiteId = $storeManager->getWebsite()->getWebsiteId();
+$storeId = $storeManager->getStore()->getId();
+
+#$websiteId = $storeManager->getWebsite()->getWebsiteId();
+$websiteId = $storeManager->getStore($storeId)->getWebsiteId();
 
 // Customer Factory to Create Customer
 $customerFactory = $objectManager->get('\Magento\Customer\Model\CustomerFactory');
