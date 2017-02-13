@@ -1,2 +1,2 @@
 # magento2example
-Magento 2.1 examples
+Show some examples of how to do things programmatically in Magento 2.1.
