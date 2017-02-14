@@ -3,7 +3,7 @@ include __DIR__ . '/../common.php';
 
 $state->setAreaCode('base');
 
-#createCategory();
+createCategory();
 listCategory();
 
 function createCategory() {
@@ -11,9 +11,12 @@ function createCategory() {
 
 	$category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
 
-	$category->setName('Computer 1');
+	$category->setName('Computer 3');
 	$category->setParentId(1); // 1: root category.
 	$category->setIsActive(true);
+	$category->setCustomAttributes([
+		'description' => 'Computer 3 desc',
+	]);
 
 	$objectManager->get('\Magento\Catalog\Api\CategoryRepositoryInterface')->save($category);
 }
