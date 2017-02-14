@@ -5,7 +5,7 @@ $state->setAreaCode('base');
 
 $productId = 1;
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-$product_obj = $objectManager->create('Magento\Catalog\Model\Product')->load($productId);
+$product_obj = $objectManager->create('\Magento\Catalog\Model\Product')->load($productId);
 
 getDefaultGroup($product_obj);
 getAnyGroup($product_obj);

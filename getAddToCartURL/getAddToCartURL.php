@@ -7,7 +7,7 @@ $listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
 
 $productId = 1;
 
-$product_obj = $objectManager->create('Magento\Catalog\Model\Product')->load($productId);
+$product_obj = $objectManager->create('\Magento\Catalog\Model\Product')->load($productId);
 
 $addToCartUrl =  $listBlock->getAddToCartUrl($product_obj);
 ?>

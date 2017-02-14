@@ -3,7 +3,7 @@ include __DIR__ . '/../common.php';
 
 $state->setAreaCode('base');
 
-$storeManager = $objectManager->get('Magento\Store\Model\StoreManagerInterface');
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
 $storeId = $storeManager->getStore()->getId();
 
 #$websiteId = $storeManager->getWebsite()->getWebsiteId();

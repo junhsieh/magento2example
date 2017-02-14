@@ -8,8 +8,8 @@ $state->setAreaCode('base');
 $sku = 'WWW1';
 $stockQty = 55;
 
-$productRepository = $objectManager->create('Magento\Catalog\Api\ProductRepositoryInterface');
-$stockRegistry = $objectManager->create('Magento\CatalogInventory\Api\StockRegistryInterface');
+$productRepository = $objectManager->create('\Magento\Catalog\Api\ProductRepositoryInterface');
+$stockRegistry = $objectManager->create('\Magento\CatalogInventory\Api\StockRegistryInterface');
 
 ### Load product by SKU
 $product = $productRepository->get($sku);
