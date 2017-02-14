@@ -8,6 +8,8 @@ $storeId = $storeManager->getStore()->getId();
 
 $productCollectionFactory = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory');
 $productCollection = $productCollectionFactory->create();
+$productCollection->addAttributeToFilter('sku', ['regexp' => '^WC01']);
+#$productCollection->addFieldToFilter('sku', ['regexp' => '^WC01']);
 $productCollection->addAttributeToSelect('*');
 
 foreach ($productCollection as $product) {
