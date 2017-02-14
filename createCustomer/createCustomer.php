@@ -56,25 +56,25 @@ function createCustomer() {
 		echo 'Succesfully Saved. Customer ID: ' . $customer->getId();
 		echo PHP_EOL;
 
-		### Add Address For created customer
-		$address = $objectManager->get('\Magento\Customer\Api\Data\AddressInterfaceFactory')->create();
-
-		$address->setCustomerId($customer->getId())
-			->setFirstname('test first')
-			->setLastname('test last')
-			->setCountryId('US')
-			->setRegionId('62') //state/province, only needed if the country is USA
-			->setPostcode('98248')
-			->setCity('Ferndale')
-			->setTelephone('7781234567')
-			->setFax('7781234567')
-			->setCompany('test company')
-			->setStreet(['test street'])
-			#->setSaveInAddressBook('1')
-			->setIsDefaultBilling('1')
-			->setIsDefaultShipping('1');
-
 		try{
+			### Add Address For created customer
+			$address = $objectManager->get('\Magento\Customer\Api\Data\AddressInterfaceFactory')->create();
+
+			$address->setCustomerId($customer->getId())
+				->setFirstname('test first')
+				->setLastname('test last')
+				->setCountryId('US')
+				->setRegionId('62') //state/province, only needed if the country is USA
+				->setPostcode('98248')
+				->setCity('Ferndale')
+				->setTelephone('7781234567')
+				->setFax('7781234567')
+				->setCompany('test company')
+				->setStreet(['test street'])
+				#->setSaveInAddressBook('1')
+				->setIsDefaultBilling('1')
+				->setIsDefaultShipping('1');
+
 			$objectManager->get('\Magento\Customer\Api\AddressRepositoryInterface')->save($address);
 		}
 		catch (Exception $e) {
