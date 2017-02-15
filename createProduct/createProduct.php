@@ -3,26 +3,22 @@ include __DIR__ . '/../common.php';
 
 $state->setAreaCode('base');
 
+$tierPriceFactory = $objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory');
+
 $tierPrices = [
-	// All groups
-	$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
-		->setCustomerGroupId(32000)->setQty(4)->setValue(10.0),
-	$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
-		->setCustomerGroupId(32000)->setQty(9)->setValue(9.0),
-	// Not logged in
-	$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
-		->setCustomerGroupId(0)->setQty(5)->setValue(10.1),
-	$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
-		->setCustomerGroupId(0)->setQty(10)->setValue(9.1),
-	// Wholesale
-	$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
-		->setCustomerGroupId(2)->setQty(6)->setValue(10.2),
-	$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
-		->setCustomerGroupId(2)->setQty(11)->setValue(9.2),
+    // All groups
+    $tierPriceFactory->create()->setCustomerGroupId(32000)->setQty(4)->setValue(10.0),
+    $tierPriceFactory->create()->setCustomerGroupId(32000)->setQty(9)->setValue(9.0),
+    // Not logged in
+    $tierPriceFactory->create()->setCustomerGroupId(0)->setQty(5)->setValue(10.1),
+    $tierPriceFactory->create()->setCustomerGroupId(0)->setQty(10)->setValue(9.1),
+    // Wholesale
+    $tierPriceFactory->create()->setCustomerGroupId(2)->setQty(6)->setValue(10.2),
+    $tierPriceFactory->create()->setCustomerGroupId(2)->setQty(11)->setValue(9.2),
 ];
 
 $prodInfoArr = [
-	['AttributeSetId' => 4, 'TypeId' => 'simple', 'Name' => 'My Product 17', 'Price' => 99, 'Sku' => 'MP17', 'Weight' => 10, 'TierPrices' => $tierPrices],
+	['AttributeSetId' => 4, 'TypeId' => 'simple', 'Name' => 'My Product 22', 'Price' => 99, 'Sku' => 'MP22', 'Weight' => 10, 'TierPrices' => $tierPrices],
 ];
 
 foreach ($prodInfoArr as $prodInfo) {
