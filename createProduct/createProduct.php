@@ -3,8 +3,26 @@ include __DIR__ . '/../common.php';
 
 $state->setAreaCode('base');
 
+$tierPrices = [
+	// All groups
+	$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
+		->setCustomerGroupId(32000)->setQty(4)->setValue(10.0),
+	$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
+		->setCustomerGroupId(32000)->setQty(9)->setValue(9.0),
+	// Not logged in
+	$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
+		->setCustomerGroupId(0)->setQty(5)->setValue(10.1),
+	$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
+		->setCustomerGroupId(0)->setQty(10)->setValue(9.1),
+	// Wholesale
+	$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
+		->setCustomerGroupId(2)->setQty(6)->setValue(10.2),
+	$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
+		->setCustomerGroupId(2)->setQty(11)->setValue(9.2),
+];
+
 $prodInfoArr = [
-	['AttributeSetId' => 4, 'TypeId' => 'simple', 'Name' => 'My Product 17', 'Price' => 99, 'Sku' => 'MP17', 'Qty' => 55, 'Weight' => 10],
+	['AttributeSetId' => 4, 'TypeId' => 'simple', 'Name' => 'My Product 17', 'Price' => 99, 'Sku' => 'MP17', 'Weight' => 10, 'TierPrices' => $tierPrices],
 ];
 
 foreach ($prodInfoArr as $prodInfo) {
@@ -23,25 +41,9 @@ function createProduct($prodInfo = []) {
 	$product->setTypeId($prodInfo['TypeId']); // important
 	$product->setName($prodInfo['Name']);
 	$product->setPrice($prodInfo['Price']);
-	$product->setTierPrices([
-		// All groups
-		$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
-			->setCustomerGroupId(32000)->setQty(4)->setValue(10.0),
-		$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
-			->setCustomerGroupId(32000)->setQty(9)->setValue(9.0),
-		// Not logged in
-		$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
-			->setCustomerGroupId(0)->setQty(5)->setValue(10.1),
-		$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
-			->setCustomerGroupId(0)->setQty(10)->setValue(9.1),
-		// Wholesale
-		$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
-			->setCustomerGroupId(2)->setQty(6)->setValue(10.2),
-		$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
-			->setCustomerGroupId(2)->setQty(11)->setValue(9.2),
-	]);
+	$product->setTierPrices($prodInfo['TierPrices']);
 	$product->setSku($prodInfo['Sku']);
-	$product->setQty($prodInfo['Qty']);
+	#$product->setQty($prodInfo['Qty']); // will not work. Use "set stock data" instead.
 	$product->setWeight($prodInfo['Weight']);
 	$product->setTaxClassId(0); // (0: none, 1: default, 2: taxable, 4: shipping)
 	$product->setStatus(1);
