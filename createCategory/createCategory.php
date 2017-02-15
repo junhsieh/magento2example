@@ -9,7 +9,8 @@ listCategory();
 function createCategory() {
 	global $objectManager;
 
-	$category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+	#$category = $objectManager->get('\Magento\Catalog\Model\CategoryFactory')->create();
+	$category = $objectManager->get('\Magento\Catalog\Api\Data\CategoryInterfaceFactory')->create();
 
 	$category->setName('Computer 3');
 	$category->setParentId(1); // 1: root category.

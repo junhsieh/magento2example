@@ -4,8 +4,7 @@ include __DIR__ . '/../common.php';
 $state->setAreaCode('base');
 
 $prodInfoArr = [
-	['AttributeSetId' => 4, 'TypeId' => 'simple', 'Name' => 'My Product 12', 'Price' => 99, 'Sku' => 'MP12', 'Qty' => 55, 'Weight' => 10],
-	#['AttributeSetId' => 4, 'TypeId' => 'simple', 'Name' => 'My Product 11', 'Price' => 98.92, 'Sku' => 'MP11', 'Qty' => 54, 'Weight' => 11],
+	['AttributeSetId' => 4, 'TypeId' => 'simple', 'Name' => 'My Product 17', 'Price' => 99, 'Sku' => 'MP17', 'Qty' => 55, 'Weight' => 10],
 ];
 
 foreach ($prodInfoArr as $prodInfo) {
@@ -17,12 +16,30 @@ getProductCollection();
 function createProduct($prodInfo = []) {
 	global $objectManager;
 
-	$product = $objectManager->get('\Magento\Catalog\Model\ProductFactory')->create();
+	#$product = $objectManager->get('\Magento\Catalog\Model\ProductFactory')->create();
+	$product = $objectManager->get('\Magento\Catalog\Api\Data\ProductInterfaceFactory')->create();
 
 	$product->setAttributeSetId($prodInfo['AttributeSetId']); // importatnt
 	$product->setTypeId($prodInfo['TypeId']); // important
 	$product->setName($prodInfo['Name']);
 	$product->setPrice($prodInfo['Price']);
+	$product->setTierPrices([
+		// All groups
+		$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
+			->setCustomerGroupId(32000)->setQty(4)->setValue(10.0),
+		$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
+			->setCustomerGroupId(32000)->setQty(9)->setValue(9.0),
+		// Not logged in
+		$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
+			->setCustomerGroupId(0)->setQty(5)->setValue(10.1),
+		$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
+			->setCustomerGroupId(0)->setQty(10)->setValue(9.1),
+		// Wholesale
+		$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
+			->setCustomerGroupId(2)->setQty(6)->setValue(10.2),
+		$objectManager->get('\Magento\Catalog\Api\Data\ProductTierPriceInterfaceFactory')->create()
+			->setCustomerGroupId(2)->setQty(11)->setValue(9.2),
+	]);
 	$product->setSku($prodInfo['Sku']);
 	$product->setQty($prodInfo['Qty']);
 	$product->setWeight($prodInfo['Weight']);
