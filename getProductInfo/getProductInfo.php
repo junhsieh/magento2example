@@ -14,6 +14,7 @@ $productCollection->addAttributeToSelect('*');
 
 foreach ($productCollection as $product) {
 	echo 'Id: ' . $product->getId() . PHP_EOL;
+	echo 'AttributeSetId: ' . $product->getAttributeSetId() . PHP_EOL;
 	echo 'Sku: ' . $product->getSku() . PHP_EOL;
 	echo 'Price: ' . $product->getPrice() . PHP_EOL;
 	echo 'Weight: ' . $product->getWeight() . PHP_EOL;
