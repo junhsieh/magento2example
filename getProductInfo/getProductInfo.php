@@ -21,3 +21,5 @@ foreach ($productCollection as $product) {
 	print_r($product->getData());
 	echo PHP_EOL;
 }
+
+echo '[DEBUG] SQL Query: ' . $productCollection->getSelect()->assemble();
